@@ -1,9 +1,9 @@
-import { Audio } from './../../../infra/entities/audio';
+import { AudioModel } from './../../models/audio';
 
 export interface ManageAudioRepository {
-    save(audio: Audio): Promise<Audio>
-    findAll(userId: number): Promise<Audio[]>
-    findByIdAndByUserId(userId: number, audioId: number): Promise<Audio>
-    update(userId: number, audioId: number): Promise<Audio>
+    save(audio: AudioModel): Promise<AudioModel>
+    findAll(userId: number): Promise<AudioModel[]>
+    findByIdAndByUserId(userId: number, audioId: number): Promise<AudioModel>
+    update(userId: number, audioId: number): Promise<AudioModel>
     delete(userId: number, audioId: number): Promise<void>
 }

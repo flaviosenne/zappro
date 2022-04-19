@@ -1,9 +1,9 @@
-import { Message } from '../../../infra/entities/message';
+import { MessageModel } from './../../models/message';
 
 export interface ManageMessagesRepository {
-    save(message: Message): Promise<Message>
-    findAll(userId: number): Promise<Message[]>
-    findByIdAndByUserId(userId: number, messageId: number): Promise<Message>
-    update(userId: number, messageId: number): Promise<Message>
+    save(message: MessageModel): Promise<MessageModel>
+    findAll(userId: number): Promise<MessageModel[]>
+    findByIdAndByUserId(userId: number, messageId: number): Promise<MessageModel>
+    update(userId: number, messageId: number): Promise<MessageModel>
     delete(userId: number, messageId: number): Promise<void>
 }

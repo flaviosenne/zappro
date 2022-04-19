@@ -56,7 +56,7 @@ export class ManageVideoRepositoryImpl implements ManageVideoRepository {
             .andWhere('user.id = :userId', { userId })
             .execute()
 
-        if (result.affected == 0) throw new BadRequest(`Error in delete message with user-id: ${userId} and video-id: ${videoId}`)
+        if (result.affected == 0) throw new BadRequest(`Error in delete video with user-id: ${userId} and video-id: ${videoId}`)
 
     }
 

@@ -56,7 +56,7 @@ export class ManageAudioRepositoryImpl implements ManageAudioRepository {
             .andWhere('user.id = :userId', { userId })
             .execute()
 
-        if (result.affected == 0) throw new BadRequest(`Error in delete message with user-id: ${userId} and audio-id: ${audioId}`)
+        if (result.affected == 0) throw new BadRequest(`Error in delete audio with user-id: ${userId} and audio-id: ${audioId}`)
 
     }
 
