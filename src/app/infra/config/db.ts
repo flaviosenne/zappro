@@ -35,7 +35,7 @@ const getDbInstance = async (): Promise<DataSource> => {
         console.info('DB SQL connected ')
 
         await connection.initialize()
-        // await connection.synchronize()
+        await connection.synchronize()
 
         return connection
     }

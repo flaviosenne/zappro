@@ -8,7 +8,7 @@ export interface CreateAccount {
 }
 
 export interface ResponseUserAccount {
-    id: number
+    id: string
     name: string
     email: string
     createdAt: Date

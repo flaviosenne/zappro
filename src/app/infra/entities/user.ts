@@ -1,12 +1,15 @@
-import { UserModel } from './../../domain/models/user';
-import { Column, CreateDateColumn, Entity, Generated, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import * as uuid from 'uuid'
 
+import { UserModel } from './../../domain/models/user';
 
 @Entity('user')
 export class User implements UserModel {
+    constructor() {
+        this.id = uuid.v4()
+    }
     @PrimaryColumn()
-    @Generated()
-    id: number
+    id: string
 
     @Column()
     name: string

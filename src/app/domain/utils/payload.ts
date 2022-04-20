@@ -1,6 +1,6 @@
 
 export type Payload = {
-    id: number,
+    id: string,
     email: string,
     name: string,
     iat: number,

@@ -20,14 +20,14 @@ export class ManageMessagesRepositoryImpl implements ManageMessagesRepository {
         return await this.connection.getRepository(Message).save(message)
     }
 
-    async findAll(userId: number): Promise<MessageModel[]> {
+    async findAll(userId: string): Promise<MessageModel[]> {
         return await this.connection.getRepository(Message).find({
             relations: ['user'],
             where: { user: { id: userId } }
         })
     }
 
-    async findByIdAndByUserId(userId: number, messageId: number): Promise<MessageModel> {
+    async findByIdAndByUserId(userId: string, messageId: string): Promise<MessageModel> {
         try {
             return await this.connection.getRepository(Message)
                 .createQueryBuilder('message')
@@ -41,11 +41,11 @@ export class ManageMessagesRepositoryImpl implements ManageMessagesRepository {
             return null
         }
     }
-    update(userId: number, messageId: number): Promise<MessageModel> {
+    update(userId: string, messageId: string): Promise<MessageModel> {
         throw new Error('Method not implemented.');
     }
 
-    async delete(userId: number, messageId: number): Promise<void> {
+    async delete(userId: string, messageId: string): Promise<void> {
         const result = await this.connection.getRepository(Message)
             .createQueryBuilder('message')
             .innerJoinAndSelect('message.user', 'user')

@@ -1,9 +1,9 @@
 import { Audio } from "../../infra/entities/audio";
 
 export interface ManageAudioProtocol {
-    save(audio: Audio, userId: number): Promise<Audio>
-    listAll(userId: number): Promise<Audio[]>
-    findByIdAndByUserId(userId: number, audioId: number): Promise<Audio>
-    update(userId: number, audioId: number): Promise<Audio>
-    delete(userId: number, audioId: number): Promise<void>
+    save(audio: Audio, userId: string): Promise<Audio>
+    listAll(userId: string): Promise<Audio[]>
+    findByIdAndByUserId(userId: string, audioId: string): Promise<Audio>
+    update(userId: string, audioId: string): Promise<Audio>
+    delete(userId: string, audioId: string): Promise<void>
 }

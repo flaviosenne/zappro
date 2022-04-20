@@ -2,8 +2,8 @@ import { Video } from './../../../infra/entities/video';
 
 export interface ManageVideoRepository {
     save(video: Video): Promise<Video>
-    findAll(userId: number): Promise<Video[]>
-    findByIdAndByUserId(userId: number, videoId: number): Promise<Video>
-    update(userId: number, videoId: number): Promise<Video>
-    delete(userId: number, videoId: number): Promise<void>
+    findAll(userId: string): Promise<Video[]>
+    findByIdAndByUserId(userId: string, videoId: string): Promise<Video>
+    update(userId: string, videoId: string): Promise<Video>
+    delete(userId: string, videoId: string): Promise<void>
 }

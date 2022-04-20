@@ -20,14 +20,14 @@ export class ManageAudioRepositoryImpl implements ManageAudioRepository {
         return await this.connection.getRepository(Audio).save(audio)
     }
 
-    async findAll(userId: number): Promise<AudioModel[]> {
+    async findAll(userId: string): Promise<AudioModel[]> {
         return await this.connection.getRepository(Audio).find({
             relations: ['user'],
             where: { user: { id: userId } }
         })
     }
 
-    async findByIdAndByUserId(userId: number, audioId: number): Promise<AudioModel> {
+    async findByIdAndByUserId(userId: string, audioId: string): Promise<AudioModel> {
         try {
             return await this.connection.getRepository(Audio)
                 .createQueryBuilder('audio')
@@ -42,11 +42,11 @@ export class ManageAudioRepositoryImpl implements ManageAudioRepository {
         }
     }
 
-    update(userId: number, audioId: number): Promise<AudioModel> {
+    update(userId: string, audioId: string): Promise<AudioModel> {
         throw new Error('Method not implemented.');
     }
 
-    async delete(userId: number, audioId: number): Promise<void> {
+    async delete(userId: string, audioId: string): Promise<void> {
         const result = await this.connection.getRepository(Audio)
             .createQueryBuilder('audio')
             .innerJoinAndSelect('audio.user', 'user')

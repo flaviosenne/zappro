@@ -19,7 +19,7 @@ export class UserRepositoryImpl implements UserRepository {
         return await this.connection.getRepository(User).findOneBy({ email })
     }
 
-    async findById(id: number): Promise<UserModel> {
+    async findById(id: string): Promise<UserModel> {
         return await this.connection.getRepository(User).findOneBy({ id })
     }
 

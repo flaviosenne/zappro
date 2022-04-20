@@ -1,12 +1,18 @@
-import { User } from './user';
-import { Column, CreateDateColumn, Entity, Generated, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import * as uuid from 'uuid'
+
 import { MessageModel } from '../../domain/models/message';
+import { User } from './user';
 
 @Entity('message')
 export class Message implements MessageModel {
+
+    constructor() {
+        this.id = uuid.v4()
+    }
+
     @PrimaryColumn()
-    @Generated()
-    id: number
+    id: string
 
     @CreateDateColumn({ name: 'created_at', default: Date.now() })
     createdAt: Date

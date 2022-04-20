@@ -1,10 +1,10 @@
-import { Payment } from './../../entities/payment';
-import { PaymentRepository } from './../../../domain/usecases/payment/payment-repository';
 import { DataSource } from 'typeorm';
 
-import { DBInstance } from '../../config/db';
-import { BadRequest } from '../../../domain/exceptions/bad-request';
 import { PaymentModel } from '../../../domain/models/payment';
+import { PaymentEnum } from '../../../domain/usecases/payment/payment.enum';
+import { DBInstance } from '../../config/db';
+import { PaymentRepository } from './../../../domain/usecases/payment/payment-repository';
+import { Payment } from './../../entities/payment';
 
 export class PaymentRepositoryImpl implements PaymentRepository {
 
@@ -20,20 +20,20 @@ export class PaymentRepositoryImpl implements PaymentRepository {
         return await this.connection.getRepository(Payment).save(payment)
     }
 
-    async findAll(userId: number): Promise<PaymentModel[]> {
+    async findAll(userId: string): Promise<PaymentModel[]> {
         return await this.connection.getRepository(Payment).find({
             relations: ['user'],
             where: { user: { id: userId } }
         })
     }
 
-    async findByIdAndByUserId(userId: number, paymentId: number): Promise<PaymentModel> {
+    async findByIdAndByUserId(userId: string, paymentResponseId: string): Promise<PaymentModel> {
         try {
             return await this.connection.getRepository(Payment)
                 .createQueryBuilder('payment')
                 .innerJoinAndSelect('payment.user', 'user')
                 .select()
-                .where('payment.id = :paymentId', { paymentId })
+                .where('payment.paymentResponseId = :paymentResponseId', { paymentResponseId })
                 .andWhere('user.id = :userId', { userId })
                 .getOne()
         }
@@ -42,22 +42,22 @@ export class PaymentRepositoryImpl implements PaymentRepository {
         }
     }
 
-    update(userId: number, paymentId: number): Promise<PaymentModel> {
-        throw new Error('Method not implemented.');
+    async updateCompleted(paymentResponseId: string): Promise<void> {
+        await this.connection.getRepository(Payment)
+            .createQueryBuilder('payment')
+            .update(Payment)
+            .set({ status: PaymentEnum.COMPLETED })
+            .where('payment.paymentResponseId = :paymentResponseId', { paymentResponseId })
+            .execute()
     }
 
-    async delete(userId: number, paymentId: number): Promise<void> {
-        const result = await this.connection.getRepository(Payment)
+    async updateError(paymentResponseId: string): Promise<void> {
+        await this.connection.getRepository(Payment)
             .createQueryBuilder('payment')
-            .innerJoinAndSelect('payment.user', 'user')
-            .delete()
-            .from(Payment)
-            .where('payment.id = :paymentId', { paymentId })
-            .andWhere('user.id = :userId', { userId })
+            .update(Payment)
+            .set({ status: PaymentEnum.ERROR })
+            .where('payment.paymentResponseId = :paymentResponseId', { paymentResponseId })
             .execute()
-
-        if (result.affected == 0) throw new BadRequest(`Error in delete payment with user-id: ${userId} and payment-id: ${paymentId}`)
-
     }
 
 

@@ -1,9 +1,9 @@
 import { Message } from "../../infra/entities/message";
 
 export interface ManageMessagesProtocol {
-    save(message: Message, userId: number): Promise<Message>
-    listAll(userId: number): Promise<Message[]>
-    findByIdAndByUserId(userId: number, messageId: number): Promise<Message>
-    update(userId: number, messageId: number): Promise<Message>
-    delete(userId: number, messageId: number): void
+    save(message: Message, userId: string): Promise<Message>
+    listAll(userId: string): Promise<Message[]>
+    findByIdAndByUserId(userId: string, messageId: string): Promise<Message>
+    update(userId: string, messageId: string): Promise<Message>
+    delete(userId: string, messageId: string): void
 }

@@ -20,7 +20,7 @@ export class ManageAudioService implements ManageAudioProtocol {
         this.repository = repository
         this.userRepository = userRepository
     }
-    async save(audio: Audio, userId: number): Promise<Audio> {
+    async save(audio: Audio, userId: string): Promise<Audio> {
 
         const existUser = await this.userRepository.findById(userId)
 
@@ -40,11 +40,11 @@ export class ManageAudioService implements ManageAudioProtocol {
         return result
     }
 
-    async listAll(userId: number): Promise<Audio[]> {
+    async listAll(userId: string): Promise<Audio[]> {
         return await this.repository.findAll(userId)
     }
 
-    async findByIdAndByUserId(userId: number, audioId: number): Promise<Audio> {
+    async findByIdAndByUserId(userId: string, audioId: string): Promise<Audio> {
         const result = await this.repository.findByIdAndByUserId(userId, audioId)
 
         if (!result) throw new BadRequest(AUDIO_NOT_FOUND)
@@ -52,11 +52,11 @@ export class ManageAudioService implements ManageAudioProtocol {
         return result
     }
 
-    update(userId: number, audioId: number): Promise<Audio> {
+    update(userId: string, audioId: string): Promise<Audio> {
         throw new NotFound('Method not implemented.');
     }
 
-    async delete(userId: number, audioId: number): Promise<void> {
+    async delete(userId: string, audioId: string): Promise<void> {
         await this.findByIdAndByUserId(userId, audioId)
         await this.repository.delete(userId, audioId)
     }

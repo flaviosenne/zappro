@@ -16,7 +16,7 @@ export class ManageMessageService implements ManageMessagesProtocol {
         this.userRepository = userRepository
     }
 
-    async save(message: Message, userId: number): Promise<Message> {
+    async save(message: Message, userId: string): Promise<Message> {
 
         const existUser = await this.userRepository.findById(userId)
 
@@ -27,11 +27,11 @@ export class ManageMessageService implements ManageMessagesProtocol {
         return await this.repository.save(message)
     }
 
-    async listAll(userId: number): Promise<Message[]> {
+    async listAll(userId: string): Promise<Message[]> {
         return await this.repository.findAll(userId)
     }
 
-    async findByIdAndByUserId(userId: number, messageId: number): Promise<Message> {
+    async findByIdAndByUserId(userId: string, messageId: string): Promise<Message> {
         const result = await this.repository.findByIdAndByUserId(userId, messageId)
 
         if (!result) throw new BadRequest(MESSAGE_NOT_FOUND)
@@ -40,11 +40,11 @@ export class ManageMessageService implements ManageMessagesProtocol {
 
     }
 
-    update(userId: number, messageId: number): Promise<Message> {
+    update(userId: string, messageId: string): Promise<Message> {
         throw new NotFound('Method not implemented.');
     }
 
-    async delete(userId: number, messageId: number): Promise<void> {
+    async delete(userId: string, messageId: string): Promise<void> {
         await this.findByIdAndByUserId(userId, messageId)
         await this.repository.delete(userId, messageId)
     }

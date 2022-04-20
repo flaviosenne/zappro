@@ -1,7 +1,7 @@
 import { UserModel } from './user';
 
 export class VideoModel {
-    id: number
+    id: string
     createdAt: Date
     updatedAt: Date
     extension: string

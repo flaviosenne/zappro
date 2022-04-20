@@ -1,13 +1,17 @@
-import { Column, CreateDateColumn, Entity, Generated, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm"
+import * as uuid from 'uuid'
 
 import { VideoModel } from '../../domain/models/video';
 import { User } from './user';
 
 @Entity('video')
 export class Video implements VideoModel {
+    constructor() {
+        this.id = uuid.v4()
+    }
+
     @PrimaryColumn()
-    @Generated()
-    id: number
+    id: string
 
     @CreateDateColumn({ name: 'created_at', default: Date.now() })
     createdAt: Date

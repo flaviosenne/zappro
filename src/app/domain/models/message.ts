@@ -1,7 +1,7 @@
 import { UserModel } from './user';
 
 export class MessageModel {
-    id: number
+    id: string
     createdAt: Date
     updatedAt: Date
     description: string

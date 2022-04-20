@@ -1,8 +1,8 @@
-import { PaymentEnum } from './payment.enum';
-import { USER_NOT_FOUND } from './../../exceptions/messages';
 import { BadRequest } from './../../exceptions/bad-request';
-import { UserRepository } from './../account/user-repository';
+import { USER_NOT_FOUND } from './../../exceptions/messages';
 import { PaymentProtocol } from './../../protocols/payment-protocol';
+import { UserRepository } from './../account/user-repository';
+import { PaymentEnum } from './payment.enum';
 
 export class PaymentService {
 
@@ -14,7 +14,7 @@ export class PaymentService {
         this.userRepository = userRepository
     }
 
-    async send(data: any, userId: number): Promise<any> {
+    async send(data: any, userId: string): Promise<any> {
         try {
 
             const existsUser = await this.userRepository.findById(userId)

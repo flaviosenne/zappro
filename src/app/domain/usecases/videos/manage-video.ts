@@ -21,7 +21,7 @@ export class ManageVideoService implements ManageVideoProtocol {
         this.userRepository = userRepository
     }
 
-    async save(video: Video, userId: number): Promise<Video> {
+    async save(video: Video, userId: string): Promise<Video> {
 
         const existUser = await this.userRepository.findById(userId)
 
@@ -41,11 +41,11 @@ export class ManageVideoService implements ManageVideoProtocol {
         return result
     }
 
-    async listAll(userId: number): Promise<Video[]> {
+    async listAll(userId: string): Promise<Video[]> {
         return await this.repository.findAll(userId)
     }
 
-    async findByIdAndByUserId(userId: number, videoId: number): Promise<Video> {
+    async findByIdAndByUserId(userId: string, videoId: string): Promise<Video> {
         const result = await this.repository.findByIdAndByUserId(userId, videoId)
 
         if (!result) throw new BadRequest(VIDEO_NOT_FOUND)
@@ -53,11 +53,11 @@ export class ManageVideoService implements ManageVideoProtocol {
         return result
     }
 
-    update(userId: number, videoId: number): Promise<Video> {
+    update(userId: string, videoId: string): Promise<Video> {
         throw new NotFound('Method not implemented.');
     }
 
-    async delete(userId: number, videoId: number): Promise<void> {
+    async delete(userId: string, videoId: string): Promise<void> {
         await this.findByIdAndByUserId(userId, videoId)
         await this.repository.delete(userId, videoId)
     }

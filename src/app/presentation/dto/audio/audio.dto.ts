@@ -1,14 +1,14 @@
 import { Audio } from './../../../infra/entities/audio';
 
 type AudioResponse = {
-    id: number
+    id: string
     createdAt: Date
     updatedAt: Date
     extension: string
     content: Buffer
     name: string
     size: string
-    user: { id: number }
+    user: { id: string }
 }
 
 export class AudioDto {

@@ -50,7 +50,7 @@ export class ManageVideoController {
         try {
             const payload: Payload = req['payload']
 
-            await this.service.delete(payload.id, Number(req.params.id))
+            await this.service.delete(payload.id, req.params.id)
 
             return res.status(204).end()
 

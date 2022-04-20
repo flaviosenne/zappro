@@ -1,7 +1,7 @@
 import { UserModel } from "./user";
 
 export class AudioModel {
-    id: number
+    id: string
     createdAt: Date
     updatedAt: Date
     extension: string

@@ -49,7 +49,7 @@ export class ManageMessageController {
             const payload: Payload = req['payload']
             const messageId = req.params.id
 
-            const result = await this.service.findByIdAndByUserId(payload.id, Number(messageId))
+            const result = await this.service.findByIdAndByUserId(payload.id, messageId)
 
             return res.status(200).json(ResponseMessageDto.response(result)).end()
 
@@ -64,7 +64,7 @@ export class ManageMessageController {
             const payload: Payload = req['payload']
             const messageId = req.params.id
 
-            await this.service.delete(payload.id, Number(messageId))
+            await this.service.delete(payload.id, messageId)
 
             return res.status(204).end()
 

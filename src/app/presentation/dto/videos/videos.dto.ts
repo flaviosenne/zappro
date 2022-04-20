@@ -1,15 +1,14 @@
-import { Audio } from '../../../infra/entities/audio';
 import { Video } from './../../../infra/entities/video';
 
 type VideoResponse = {
-    id: number
+    id: string
     createdAt: Date
     updatedAt: Date
     extension: string
     content: Buffer
     name: string
     size: string
-    user: { id: number }
+    user: { id: string }
 }
 
 export class VideoDto {

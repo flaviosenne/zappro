@@ -17,7 +17,6 @@ export class ManageAudioController {
         try {
             const file = req.file
 
-            console.log('file ', file)
             const payload: Payload = req['payload']
 
             const result = await this.service.save(AudioDto.of(file), payload.id)
@@ -51,7 +50,7 @@ export class ManageAudioController {
         try {
             const payload: Payload = req['payload']
 
-            await this.service.delete(payload.id, Number(req.params.id))
+            await this.service.delete(payload.id, req.params.id)
 
             return res.status(204).end()
 

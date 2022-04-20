@@ -1,11 +1,11 @@
 import { Message } from './../../../infra/entities/message';
 
 export class ResponseMessageDto {
-    id: number
+    id: string
     createdAt: Date
     updatedAt: Date
     description: string
-    user: { id: number }
+    user: { id: string }
 
     static response(message: Message): ResponseMessageDto {
         return {

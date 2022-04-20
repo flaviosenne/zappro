@@ -20,14 +20,14 @@ export class ManageVideoRepositoryImpl implements ManageVideoRepository {
         return await this.connection.getRepository(Video).save(video)
     }
 
-    async findAll(userId: number): Promise<VideoModel[]> {
+    async findAll(userId: string): Promise<VideoModel[]> {
         return await this.connection.getRepository(Video).find({
             relations: ['user'],
             where: { user: { id: userId } }
         })
     }
 
-    async findByIdAndByUserId(userId: number, videoId: number): Promise<VideoModel> {
+    async findByIdAndByUserId(userId: string, videoId: string): Promise<VideoModel> {
         try {
             return await this.connection.getRepository(Video)
                 .createQueryBuilder('video')
@@ -42,11 +42,11 @@ export class ManageVideoRepositoryImpl implements ManageVideoRepository {
         }
     }
 
-    update(userId: number, videoId: number): Promise<VideoModel> {
+    update(userId: string, videoId: string): Promise<VideoModel> {
         throw new Error('Method not implemented.');
     }
 
-    async delete(userId: number, videoId: number): Promise<void> {
+    async delete(userId: string, videoId: string): Promise<void> {
         const result = await this.connection.getRepository(Video)
             .createQueryBuilder('video')
             .innerJoinAndSelect('video.user', 'user')
