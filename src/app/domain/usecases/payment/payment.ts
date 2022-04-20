@@ -4,7 +4,7 @@ import { PaymentProtocol } from './../../protocols/payment-protocol';
 import { UserRepository } from './../account/user-repository';
 import { PaymentEnum } from './payment.enum';
 
-export class PaymentService {
+export class PaymentService implements PaymentProtocol {
 
     private payment: PaymentProtocol
     private userRepository: UserRepository
@@ -21,9 +21,10 @@ export class PaymentService {
 
             if (!existsUser) throw new BadRequest(USER_NOT_FOUND)
 
-            this.payment.send(data)
+            const result = await this.payment.send(data, userId)
 
-            return { status: PaymentEnum.PENDING, message: 'payment in proccess' }
+            return result
+
         } catch (e) {
             return { status: PaymentEnum.ERROR, message: '' }
         }
