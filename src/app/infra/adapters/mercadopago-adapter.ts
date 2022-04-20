@@ -6,9 +6,6 @@ import { ServerError } from '../../domain/exceptions/server-error';
 import { PaymentProtocol } from './../../domain/protocols/payment-protocol';
 
 const MERCADOPAGO_ACCESS_TOKEN = process.env.MERCADOPAGO_ACCESS_TOKEN
-const MERCADOPAGO_URI = process.env.MERCADOPAGO_URI
-const MERCADOPAGO_WEBHOOK_URI = process.env.MERCADOPAGO_WEBHOOK_URI
-const CHECKOUT_URI = `${MERCADOPAGO_URI}/checkout/preferences?access_token=${MERCADOPAGO_ACCESS_TOKEN}`
 
 const webhooks = {
     'success': 'http://localhost:5000/payment-webhook/success',
